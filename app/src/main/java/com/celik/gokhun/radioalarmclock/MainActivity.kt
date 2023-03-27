@@ -1,6 +1,5 @@
 package com.celik.gokhun.radioalarmclock
 
-import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.celik.gokhun.radioalarmclock.databinding.ActivityMainBinding
@@ -10,30 +9,32 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        var alarmItem: AlarmItem? = null
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val alarmItem: AlarmItem?
 
         val scheduler = AndroidAlarmScheduler(this)
 
 
+        println("ahmetcan")
+
         alarmItem = AlarmItem(
-            time = LocalDateTime.now()
-                .plusSeconds("10".toLong()),
+            time = LocalDateTime.now().plusSeconds("100".toLong()),
             message = "ahmetcan"
         )
-        alarmItem?.let(scheduler::schedule)
+        alarmItem.let(scheduler::schedule)
 
-        setContentView(binding.root)
-        setView()
+
     }
 
-    private fun setView() {
+    private fun openRadio() {
         with(binding) {
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.loadUrl("https://icecast-rian.cdnvideo.ru/voicestm")
         }
     }
 
